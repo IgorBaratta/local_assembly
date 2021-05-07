@@ -24,7 +24,8 @@ if not machine:
 os.environ["UFC_INCLUDE_DIR"] = ffcx.codegeneration.get_include_path()
 
 family = problem.split(".")[0]
-nrepeats = 10
+nrepeats = 5
+ncells = 100000
 degrees = [1, 2, 3]
 
 if family == "Lagrange":
@@ -52,7 +53,7 @@ for flag in opt_flags:
             # Uses PE_ENV if on Cray
             compiler_name = os.environ.get("PE_ENV", compiler[0])
 
-            d = {'degree': str(degree), 'vdegree': str(degree + 1)}
+            d = {'degree': str(degree)}
             with open(problem, 'r') as f:
                 src = Template(f.read())
                 result = src.substitute(d)
@@ -74,5 +75,5 @@ for flag in opt_flags:
                     print(i, text1)
                     with open(out_file, "a") as file:
                         file.write(text1)
-                    if os.system(f"./build/benchmark >>{out_file}") != 0:
+                    if os.system(f"./build/benchmark {ncells} >>{out_file}") != 0:
                         raise RuntimeError("benchmark failed")

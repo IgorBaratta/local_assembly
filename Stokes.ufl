@@ -20,7 +20,7 @@
 
 # Compile this form with FFC: ffcx Stokes.ufl
 
-P2 = VectorElement("Lagrange", triangle, $vdegree)
+P2 = VectorElement("Lagrange", triangle, $degree + 1)
 P1 = FiniteElement("Lagrange", triangle, $degree)
 TH = P2 * P1
 
