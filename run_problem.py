@@ -38,7 +38,7 @@ ffc_opts = {"ffcx": "",
 
 
 
-title = "machine,problem,compiler,flags,degree,method,ncells,time"
+title = "machine,problem,compiler,flags,degree,method,ncells,LHStime,RHStime"
 out_file = str(family) + ".txt"
 if not os.path.exists(out_file):
     with open(out_file, "a") as f:
