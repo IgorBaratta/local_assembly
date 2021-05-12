@@ -12,6 +12,7 @@
 
 # Function spaces
 element = VectorElement("Lagrange", tetrahedron, $degree)
+dx = dx(metadata={'quadrature_degree': $degree + 1})
 
 # Trial and test functions
 du = TrialFunction(element)     # Incremental displacement
