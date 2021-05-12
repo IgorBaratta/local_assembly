@@ -32,7 +32,7 @@ if family == "Lagrange":
 
 ffc_opts = {"ffcx": "",
             "fused": "--fuse_loops",
-            "fused aligned": "--assume_aligned=64 --fuse_loops",
+            "fused aligned": "--assume_aligned=512 --fuse_loops",
             "fused + full_tables": "--fuse_loops --full_tables",
             "fused + hoist": "--fuse_loops --code_hoisting",
             "fused + ft + hoist": "--fuse_loops --full_tables --code_hoisting"}
