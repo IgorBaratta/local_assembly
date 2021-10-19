@@ -1,15 +1,16 @@
+
+#include <ufc.h>
 #include "problem.h"
 #include <iostream>
-#include <ufc.h>
 #include <chrono>
 
 int main(int argc, char *argv[])
 {
-    int ncells = 100'000;
+    int ncells = 100000;
 
-    ufc_form a = *form_problem_a;
-    int ndofs_cell = a.finite_elements[1]->space_dimension;
-    auto &&kernel = a.integrals(ufc_integral_type::cell)[0]->tabulate_tensor;
+    problem_cell_integral_0_otherwise a;
+    
+    int ndofs_cell = 10000;
 
     const double coordinate_dofs[12] = {0.1, 0.0, 0.1, 1.0, 0.0, 0.1, 0.0, 1.0,
                                         0.0, 0.0, 0.0, 1.0};
@@ -23,7 +24,7 @@ int main(int argc, char *argv[])
     auto start = std::chrono::steady_clock::now();
     for (int c = 0; c < ncells; c++)
     {
-        kernel(Ae, coefficients, nullptr, coordinate_dofs, 0, 0, 0);
+      a.tabulate_tensor(Ae, reinterpret_cast<const double * const*>(coefficients),  coordinate_dofs, 0);
     }
     auto end = std::chrono::steady_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / 1.e6;
