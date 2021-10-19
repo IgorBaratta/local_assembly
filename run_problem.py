@@ -28,7 +28,7 @@ nrepeats = 10
 degrees = [1, 2, 3]
 
 if family == "Lagrange":
-    degrees = [ 3, 4, 5]
+    degrees = [1, 2, 3, 4, 5]
 
 ffc_opts = {"ffc": ""}
 
