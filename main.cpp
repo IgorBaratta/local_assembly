@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 
     double Ae[ndofs_cell * ndofs_cell];
     double coefficients[ndofs_cell];
-    double *coeff_ref = &coefficients[0];
+    const double *coeff_ref = &coefficients[0];
 
     for (int i = 0; i < ndofs_cell; i ++)
         coefficients[i] = 1.0;
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     auto start = std::chrono::steady_clock::now();
     for (int c = 0; c < ncells; c++)
     {
-      a.tabulate_tensor(Ae, reinterpret_cast<const double * const*>(&coeff_ref),  coordinate_dofs, 0);
+      a.tabulate_tensor(Ae, &coeff_ref,  coordinate_dofs, 0);
     }
     auto end = std::chrono::steady_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / 1.e6;
